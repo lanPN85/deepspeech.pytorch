@@ -74,8 +74,10 @@ if __name__ == '__main__':
         target_strings = target_decoder.convert_to_strings(split_targets)
         for x in range(len(target_strings)):
             transcript, reference = decoded_output[x][0], target_strings[x][0]
+            if len(reference) < 1:
+                continue
             # Switch back # to spaces
-            transcript = transcript.replace('#', ' ')
+            # transcript = transcript.replace('#', ' ')
             wer_inst = decoder.wer(transcript, reference)
             cer_inst = decoder.cer(transcript, reference)
             total_wer += wer_inst
@@ -85,7 +87,10 @@ if __name__ == '__main__':
             if args.verbose:
                 print("Ref:", reference.lower())
                 print("Hyp:", transcript.lower())
-                print("WER:", float(wer_inst) / len(reference.split()), "CER:", float(cer_inst) / len(reference), "\n")
+                try:
+                    print("WER:", float(wer_inst) / len(reference.split()), "CER:", float(cer_inst) / len(reference), "\n")
+                except ZeroDivisionError:
+                    pass
 
     if decoder is not None:
         wer = float(total_wer) / num_tokens
