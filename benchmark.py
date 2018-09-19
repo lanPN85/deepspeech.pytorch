@@ -5,7 +5,7 @@ import torch
 from tqdm import tqdm
 from warpctc_pytorch import CTCLoss
 from tqdm import trange
-from model import DeepSpeech, supported_rnns
+from torch_dsp.model import DeepSpeech, supported_rnns
 import torch.distributed as dist
 import torch.utils.data.distributed
 

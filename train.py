@@ -8,10 +8,10 @@ import torch.utils.data.distributed
 from tqdm import tqdm
 from warpctc_pytorch import CTCLoss
 
-from data.data_loader import AudioDataLoader, SpectrogramDataset, BucketingSampler, DistributedBucketingSampler
-from data.utils import reduce_tensor
-from decoder import GreedyDecoder
-from model import DeepSpeech, supported_rnns
+from torch_dsp.data_loader import AudioDataLoader, SpectrogramDataset, BucketingSampler, DistributedBucketingSampler
+from torch_dsp.utils import reduce_tensor
+from torch_dsp.decoder import GreedyDecoder
+from torch_dsp.model import DeepSpeech, supported_rnns
 
 parser = argparse.ArgumentParser(description='DeepSpeech training')
 parser.add_argument('--train-manifest', metavar='DIR',

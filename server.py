@@ -4,11 +4,11 @@ from tempfile import NamedTemporaryFile
 import torch
 from flask import Flask, request, jsonify
 import logging
-from data.data_loader import SpectrogramParser
-from decoder import GreedyDecoder
-from model import DeepSpeech
-from opts import add_decoder_args, add_inference_args
-from transcribe import transcribe
+from torch_dsp.data_loader import SpectrogramParser
+from torch_dsp.decoder import GreedyDecoder
+from torch_dsp.model import DeepSpeech
+from torch_dsp.opts import add_decoder_args, add_inference_args
+from torch_dsp.transcribe import transcribe
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['.wav', '.mp3', '.ogg', '.webm'])

@@ -4,10 +4,10 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from data.data_loader import SpectrogramDataset, AudioDataLoader
-from decoder import GreedyDecoder
-from model import DeepSpeech
-from opts import add_decoder_args, add_inference_args
+from torch_dsp.data_loader import SpectrogramDataset, AudioDataLoader
+from torch_dsp.decoder import GreedyDecoder
+from torch_dsp.model import DeepSpeech
+from torch_dsp.opts import add_decoder_args, add_inference_args
 
 parser = argparse.ArgumentParser(description='DeepSpeech transcription')
 parser = add_inference_args(parser)
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     audio_conf = DeepSpeech.get_audio_conf(model)
 
     if args.decoder == "beam":
-        from decoder import BeamCTCDecoder
+        from torch_dsp.decoder import BeamCTCDecoder
 
         decoder = BeamCTCDecoder(labels, lm_path=args.lm_path, alpha=args.alpha, beta=args.beta,
                                  cutoff_top_n=args.cutoff_top_n, cutoff_prob=args.cutoff_prob,

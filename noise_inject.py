@@ -3,7 +3,7 @@ import argparse
 import torch
 import torchaudio
 
-from data.data_loader import load_audio, NoiseInjection
+from torch_dsp.data_loader import load_audio, NoiseInjection
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input-path', default='input.wav', help='The input audio to inject noise into')

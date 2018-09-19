@@ -97,4 +97,3 @@ if __name__ == '__main__':
             text += out['transcription']
             prev = out['transcription']
     print(text)
->>>>>>> Stashed changes
