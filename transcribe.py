@@ -83,6 +83,18 @@ if __name__ == '__main__':
         decoder = GreedyDecoder(labels, blank_index=labels.index('_'))
 
     parser = SpectrogramParser(audio_conf, normalize=True)
-
-    decoded_output, decoded_offsets = transcribe(args.audio_path, parser, model, decoder, args.cuda)
-    print(json.dumps(decode_results(model, decoded_output, decoded_offsets)))
+    
+    spect = parser.parse_audio(args.audio_path).contiguous()
+    spect = spect.view(1, 1, spect.size(0), spect.size(1))
+    out = model(Variable(spect, volatile=True))
+    out = out.transpose(0, 1)  # TxNxH
+    decoded_output, decoded_offsets = decoder.decode(out.data)
+    results = decode_results(model, decoded_output, decoded_offsets)
+    text = ''
+    prev = ''
+    for out in results['output']:
+        if out['transcription'] != prev:
+            text += out['transcription']
+            prev = out['transcription']
+    print(text)
+>>>>>>> Stashed changes

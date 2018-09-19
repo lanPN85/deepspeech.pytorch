@@ -74,6 +74,8 @@ if __name__ == '__main__':
         target_strings = target_decoder.convert_to_strings(split_targets)
         for x in range(len(target_strings)):
             transcript, reference = decoded_output[x][0], target_strings[x][0]
+            # Switch back # to spaces
+            transcript = transcript.replace('#', ' ')
             wer_inst = decoder.wer(transcript, reference)
             cer_inst = decoder.cer(transcript, reference)
             total_wer += wer_inst

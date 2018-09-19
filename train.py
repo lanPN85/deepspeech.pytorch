@@ -318,9 +318,12 @@ if __name__ == '__main__':
                 target_strings = decoder.convert_to_strings(split_targets)
                 wer, cer = 0, 0
                 for x in range(len(target_strings)):
-                    transcript, reference = decoded_output[x][0], target_strings[x][0]
-                    wer += decoder.wer(transcript, reference) / float(len(reference.split()))
-                    cer += decoder.cer(transcript, reference) / float(len(reference))
+                    try:
+                        transcript, reference = decoded_output[x][0], target_strings[x][0]
+                        wer += decoder.wer(transcript, reference) / float(len(reference.split()))
+                        cer += decoder.cer(transcript, reference) / float(len(reference))
+                    except ZeroDivisionError:
+                        pass
                 total_cer += cer
                 total_wer += wer
                 del out
